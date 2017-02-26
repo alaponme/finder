@@ -1,0 +1,22 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/menu_circle"
+        android:title="Circle"
+        android:icon="@drawable/ic_event_black_24dp"
+        />
+
+    <item
+        android:id="@+id/menu_map"
+        android:title="Map"
+        android:icon="@drawable/search"
+        />
+
+
+
+
+
+
+</menu>
