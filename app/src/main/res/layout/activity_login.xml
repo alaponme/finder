@@ -35,10 +35,10 @@ tools:context="me.alapon.reaz.friendfinder.Activity.LoginActivity">
             android:layout_height="wrap_content">
 
             <AutoCompleteTextView
-                android:id="@+id/emailET"
+                android:id="@+id/usernameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/inut_email"
+                android:hint="@string/input_username"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />

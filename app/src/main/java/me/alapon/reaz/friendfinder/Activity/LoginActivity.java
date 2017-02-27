@@ -18,14 +18,14 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText emailET, passwordET;
+    EditText usernameET, passwordET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        emailET = (EditText) findViewById(R.id.emailET);
+        usernameET = (EditText) findViewById(R.id.usernameET);
         passwordET = (EditText) findViewById(R.id.passwordET);
 
 
@@ -37,13 +37,14 @@ public class LoginActivity extends AppCompatActivity {
 
     public void Login(View view) {
 
-        String email, password;
+        String username, password;
 
-        email = emailET.getText().toString();
+
+        username = usernameET.getText().toString();
         password = passwordET.getText().toString();
 
-        if(email.isEmpty() && password.isEmpty()){
-            Toast.makeText(this, "Email/Password is empty", Toast.LENGTH_SHORT).show();
+        if(username.isEmpty() || password.isEmpty()){
+            Toast.makeText(this, "Username/Password is empty", Toast.LENGTH_SHORT).show();
         }
         else{
 
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             ApiService loginApi= RetrofitClient.getRetrofitClient().create(ApiService.class);
 
             ///set user,pass to interface
-            Call<LoginResponse> loginResponseCall=loginApi.login(email,password);
+            Call<LoginResponse> loginResponseCall=loginApi.login(username,password);
 
             loginResponseCall.enqueue(new Callback<LoginResponse>() {
                 @Override

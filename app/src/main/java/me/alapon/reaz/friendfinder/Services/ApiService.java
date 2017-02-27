@@ -2,6 +2,7 @@ package me.alapon.reaz.friendfinder.Services;
 
 
 
+import me.alapon.reaz.friendfinder.Model.GeneralResponse;
 import me.alapon.reaz.friendfinder.Model.LoginResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,10 +13,18 @@ import retrofit2.http.POST;
 public interface ApiService {
 
 
-   @POST("login")
+   @POST("api.php?action=login")
    @FormUrlEncoded
-   Call<LoginResponse> login(@Field("email") String username,
+   Call<LoginResponse> login(@Field("username") String username,
                              @Field("password") String password);
+
+   @POST("api.php?action=register")
+   @FormUrlEncoded
+   Call<GeneralResponse> register(
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("email") String email)
+           ;
 
 /*    @GET("android/sample.php")
     Call<List<Person>> getAllPerson() ;*/
