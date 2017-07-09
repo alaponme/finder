@@ -1,5 +1,7 @@
-package me.alapon.reaz.friendfinder.Activity;
+package me.alapon.reaz.friendfinder.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,11 +11,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import me.alapon.reaz.friendfinder.Fragments.CircleFragment;
-import me.alapon.reaz.friendfinder.Fragments.MapFragment;
+import me.alapon.reaz.friendfinder.fragments.CircleFragment;
+import me.alapon.reaz.friendfinder.fragments.MapFragment;
 import me.alapon.reaz.friendfinder.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +26,14 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
 
+    SharedPreferences sharedpreferences;
+    public static final String UserPref = "UserData";
+    public static final String UserToken = "UserToken";
+    public static final String UserCircle = "UserCircle";
+    public static final String UserCircleID = "UserCircleID";
 
+    public static final String UserLati = "UserLati";
+    public static final String UserLongi = "UserLongi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         String token = getIntent().getStringExtra("token");
 
-        Toast.makeText(this, ""+token, Toast.LENGTH_SHORT).show();
+        //Initialize
+        sharedpreferences = this.getSharedPreferences(UserPref, Context.MODE_PRIVATE);
+        ///
+        addToSharedPref(token);
 
-
-        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectFragment(item);
-                return true;
-            }
-        });
+        initilizeBottomNavigation();
 
         MenuItem selectedItem;
         if (savedInstanceState != null) {
@@ -53,8 +59,28 @@ public class MainActivity extends AppCompatActivity {
         selectFragment(selectedItem);
     }
 
+    public void initilizeBottomNavigation(){
 
+        //Bottom navigation
+        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectFragment(item);
+                return true;
+            }
+        });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.my_tab_menu, menu);
+
+        return true;
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -84,17 +110,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_map:
                 frag = new MapFragment();
                 break;
-
         }
-
         // update selected item
         mSelectedItem = item.getItemId();
-
 
         ///set Check First menu
         MenuItem menuItem = mBottomNav.getMenu().getItem(0);
         menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-
 
         updateToolbarText(item.getTitle());
 
@@ -116,5 +138,18 @@ public class MainActivity extends AppCompatActivity {
     private int getColorFromRes(@ColorRes int resId) {
         return ContextCompat.getColor(this, resId);
     }
+
+
+    private  void addToSharedPref(String token){
+
+        //Initialize
+        //Add value
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(UserToken, token);
+        editor.commit();
+
+    }
+
+
 
 }

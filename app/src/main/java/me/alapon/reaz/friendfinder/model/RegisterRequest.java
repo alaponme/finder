@@ -1,4 +1,4 @@
-package me.alapon.reaz.friendfinder.Model;
+package me.alapon.reaz.friendfinder.model;
 
 /**
  * Created by prince on 2/27/2017.
@@ -13,7 +13,7 @@ public class RegisterRequest {
 
     public boolean validateUsername(String username) {
 
-        if(username.length() > 4)
+        if(username.length() >= 4)
         {
             this.username = username;
             return true;
@@ -26,7 +26,7 @@ public class RegisterRequest {
 
     public boolean validatePassword(String pass) {
 
-        if(pass.length() >= 3)
+        if(pass.length() >= 4)
         {
             this.password = pass;
             return true;

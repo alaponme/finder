@@ -1,4 +1,4 @@
-package me.alapon.reaz.friendfinder.Model;
+package me.alapon.reaz.friendfinder.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

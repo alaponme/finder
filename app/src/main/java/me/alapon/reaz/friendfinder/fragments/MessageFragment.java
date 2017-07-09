@@ -1,4 +1,4 @@
-package me.alapon.reaz.friendfinder.Fragments;
+package me.alapon.reaz.friendfinder.fragments;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import me.alapon.reaz.friendfinder.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CircleFragment extends Fragment {
+public class MessageFragment extends Fragment {
 
 
-    public CircleFragment() {
+    public MessageFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class CircleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_circle, container, false);
+        return inflater.inflate(R.layout.fragment_message, container, false);
     }
 
 }

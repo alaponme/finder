@@ -1,4 +1,4 @@
-package me.alapon.reaz.friendfinder.Activity;
+package me.alapon.reaz.friendfinder.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import me.alapon.reaz.friendfinder.Model.LoginResponse;
+import me.alapon.reaz.friendfinder.model.LoginResponse;
 import me.alapon.reaz.friendfinder.R;
-import me.alapon.reaz.friendfinder.Services.ApiService;
-import me.alapon.reaz.friendfinder.Services.RetrofitClient;
+import me.alapon.reaz.friendfinder.services.ApiService;
+import me.alapon.reaz.friendfinder.services.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,27 +43,25 @@ public class LoginActivity extends AppCompatActivity {
         username = usernameET.getText().toString();
         password = passwordET.getText().toString();
 
-        if(username.isEmpty() || password.isEmpty()){
+        if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Username/Password is empty", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
 
             ///Set the retrofit client then connect with interface
-            ApiService loginApi= RetrofitClient.getRetrofitClient().create(ApiService.class);
+            ApiService loginApi = RetrofitClient.getRetrofitClient().create(ApiService.class);
 
             ///set user,pass to interface
-            Call<LoginResponse> loginResponseCall=loginApi.login(username,password);
+            Call<LoginResponse> loginResponseCall = loginApi.login(username, password);
 
             loginResponseCall.enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                    LoginResponse res =response.body();
+                    LoginResponse res = response.body();
 
                     boolean status = res.getStatus();
 
-                    if(status==true)
-                    {
+                    if (status == true) {
 
                         String token = res.getToken();
 
@@ -71,15 +69,14 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("token", token);
                         startActivity(intent);
 
-                        Log.d("id", ""+ token);
+                        Toast.makeText(LoginActivity.this, ""+token, Toast.LENGTH_SHORT).show();
+                        Log.d("id", "" + token);
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(LoginActivity.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
                     }
 
-                    Log.d("response", ""+ status);
+                    Log.d("response", "" + status);
                 }
 
                 @Override
@@ -97,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void SignUp(View view) {
 
-         Intent main = new Intent(LoginActivity.this, Register.class);
+        Intent main = new Intent(LoginActivity.this, Register.class);
         startActivity(main);
     }
 }

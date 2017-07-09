@@ -1,4 +1,4 @@
-package me.alapon.reaz.friendfinder.Activity;
+package me.alapon.reaz.friendfinder.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import me.alapon.reaz.friendfinder.Model.GeneralResponse;
-import me.alapon.reaz.friendfinder.Model.LoginResponse;
-import me.alapon.reaz.friendfinder.Model.RegisterRequest;
+import me.alapon.reaz.friendfinder.model.GeneralResponse;
+import me.alapon.reaz.friendfinder.model.RegisterRequest;
 import me.alapon.reaz.friendfinder.R;
-import me.alapon.reaz.friendfinder.Services.ApiService;
-import me.alapon.reaz.friendfinder.Services.RetrofitClient;
+import me.alapon.reaz.friendfinder.services.ApiService;
+import me.alapon.reaz.friendfinder.services.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
